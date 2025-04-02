@@ -1,63 +1,33 @@
-"use client"
+"use client";
 
-import { useEffect, useState, useRef } from "react"
-import { useLanguage } from "@/context/language-context"
-import { es, en } from "@/lib/content"
+import { useEffect, useState, useRef } from "react";
+import { useLanguage } from "@/context/language-context";
+import { es, en } from "@/lib/content";
 
-import { FloatingNavbar } from "@/components/floating-navbar"
-import { HeroSection } from "@/components/hero-section"
-import { ChatBubble } from "@/components/chat-bubble"
-import { InfiniteCarousel } from "@/components/infinite-carousel"
+import { FloatingNavbar } from "@/components/floating-navbar";
+import { HeroSection } from "@/components/hero-section";
+import { ChatBubble } from "@/components/chat-bubble";
+import { InfiniteCarousel } from "@/components/infinite-carousel";
 
-// Importar secciones
-import { QuienesSomosSection } from "@/components/sections/quienes-somos-section"
-import { ServiciosSection } from "@/components/sections/servicios-section"
-import { PropuestaValorSection } from "@/components/sections/propuesta-valor-section"
-import { ObjetivosSection } from "@/components/sections/objetivos-section"
-import { AreasEspecializacionSection } from "@/components/sections/areas-especializacion-section"
-import { MetodologiaSection } from "@/components/sections/metodologia-section"
-import { InformacionRequeridaSection } from "@/components/sections/informacion-requerida-section"
-import { EntregablesSection } from "@/components/sections/entregables-section"
-import { EquipoTrabajoSection } from "@/components/sections/equipo-trabajo-section"
-import { ContactoSection } from "@/components/sections/contacto-section"
-import { FooterSection } from "@/components/sections/footer-section"
-
-// Variantes para animaciones
-const fadeIn = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6 },
-  },
-}
-
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-}
-
-const itemVariant = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: "easeOut" },
-  },
-}
+import { QuienesSomosSection } from "@/components/sections/quienes-somos-section";
+import { ServiciosSection } from "@/components/sections/servicios-section";
+import { PropuestaValorSection } from "@/components/sections/propuesta-valor-section";
+import { ObjetivosSection } from "@/components/sections/objetivos-section";
+import { AreasEspecializacionSection } from "@/components/sections/areas-especializacion-section";
+import { MetodologiaSection } from "@/components/sections/metodologia-section";
+import { InformacionRequeridaSection } from "@/components/sections/informacion-requerida-section";
+import { EntregablesSection } from "@/components/sections/entregables-section";
+import { EquipoTrabajoSection } from "@/components/sections/equipo-trabajo-section";
+import { ContactoSection } from "@/components/sections/contacto-section";
+import { FooterSection } from "@/components/sections/footer-section";
 
 export default function Home() {
-  const { language } = useLanguage()
-  const content = language === "es" ? es : en
-  const [scrollY, setScrollY] = useState(0)
-  const currentYear = new Date().getFullYear()
-  const contactRef = useRef<HTMLElement>(null)
-  const serviciosRef = useRef<HTMLElement>(null)
+  const { language } = useLanguage();
+  const content = language === "es" ? es : en;
+  const [scrollY, setScrollY] = useState(0);
+  const currentYear = new Date().getFullYear();
+  const contactRef = useRef<HTMLElement>(null);
+  const serviciosRef = useRef<HTMLElement>(null);
 
   // Definir los elementos de navegación
   const navItems = [
@@ -68,7 +38,7 @@ export default function Home() {
     { label: "Áreas", href: "areas" },
     { label: "Metodología", href: "metodologia" },
     { label: "Contacto", href: "contacto" },
-  ]
+  ];
 
   // Datos de clientes para el carrusel
   const clients = [
@@ -82,55 +52,55 @@ export default function Home() {
     { id: 8, name: "Molitalia", image: "/customers/Molitalia.png" },
     { id: 9, name: "Telefonica", image: "/customers/Telefonica.jpg" },
     { id: 10, name: "Quicksa", image: "/customers/Quicksa.webp" },
-  ]
+  ];
 
   // Smooth scroll to section when clicking on nav links
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash
+      const hash = window.location.hash;
       if (hash) {
-        const element = document.querySelector(hash)
+        const element = document.querySelector(hash);
         if (element) {
-          element.scrollIntoView({ behavior: "smooth" })
+          element.scrollIntoView({ behavior: "smooth" });
         }
       }
-    }
+    };
 
     // Handle initial hash on page load
     if (window.location.hash) {
-      setTimeout(handleHashChange, 100)
+      setTimeout(handleHashChange, 100);
     }
 
     // Add event listener for hash changes
-    window.addEventListener("hashchange", handleHashChange)
+    window.addEventListener("hashchange", handleHashChange);
 
     // Track scroll position for animations
     const handleScroll = () => {
-      setScrollY(window.scrollY)
-    }
+      setScrollY(window.scrollY);
+    };
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener("hashchange", handleHashChange)
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [])
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   const scrollToContact = () => {
-    contactRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    contactRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   const scrollToServicios = () => {
-    serviciosRef.current?.scrollIntoView({ behavior: "smooth" })
-  }
+    serviciosRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -188,7 +158,11 @@ export default function Home() {
 
         {/* Clientes */}
         <section id="clientes">
-          <InfiniteCarousel clients={clients} title={content.clients.title} description={content.clients.description} />
+          <InfiniteCarousel
+            clients={clients}
+            title={content.clients.title}
+            description={content.clients.description}
+          />
         </section>
 
         {/* Contacto */}
@@ -203,6 +177,5 @@ export default function Home() {
       {/* Chat Bubble */}
       <ChatBubble />
     </div>
-  )
+  );
 }
-

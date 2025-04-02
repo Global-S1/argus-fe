@@ -3,7 +3,7 @@
 import { config } from "@/config";
 import nodemailer from "nodemailer";
 import { IEmailParams } from "./params.interface";
-import { ContactUsTemplate } from "./templates/contact-us.template";
+import { ThankForContactUsTemplate } from "./templates/thanks-contact-us.template";
 
 const transporter = nodemailer.createTransport({
   host: config.EMAIL_HOST,
@@ -16,18 +16,26 @@ const transporter = nodemailer.createTransport({
 } as nodemailer.TransportOptions);
 
 export const sendMail = async (fields: IEmailParams) => {
-  const template = ContactUsTemplate(fields);
+  const { to } = fields;
 
-  const mailOptions = {
-    from: '"Nombre" <contacto@argus.globals.one>',
-    to: "julian.agama@globals.one",
+  const userEmail = ThankForContactUsTemplate(fields);
+
+  const userMailOptions = {
+    from: '"Argus" <contacto@argus.globals.one>',
+    to,
     subject: "Prueba",
-    text: "Contenido del correo en texto plano",
-    // html: template,
+    html: userEmail,
+  };
+
+  const argusMailOptions = {
+    from: '"Argus" <contacto@argus.globals.one>',
+    to,
+    subject: "Prueba",
+    html: userEmail,
   };
 
   try {
-    const info = await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(userMailOptions);
     console.log("Correo enviado", info.response);
   } catch (error) {
     console.log("Error", error);

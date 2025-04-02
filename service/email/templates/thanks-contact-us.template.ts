@@ -1,7 +1,7 @@
 import { IEmailParams } from "../params.interface";
 
-export const ContactUsTemplate = (fields: IEmailParams): string => {
-  const { text, to, company, lastname, name } = fields;
+export const ThankForContactUsTemplate = (fields: IEmailParams): string => {
+  const { lastname, name } = fields;
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,12 +65,12 @@ export const ContactUsTemplate = (fields: IEmailParams): string => {
             <h1>Bienvenido a Argus</h1>
         </div>
         <div class="content">
-            <h1>Hola,</h1>
+            <h1>Hola, ${name} ${lastname}</h1>
             <p>¡Gracias por unirte a Argus! Nos entusiasma tenerte a bordo. Esperamos que encuentres nuestros servicios útiles y valiosos.</p>
-            <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+            <p>En breve un miembro de nuestro equipo se estará poniendo en contacto contigo.</p>
         </div>
         <div class="footer">
-            © 2023 Argus. Todos los derechos reservados.
+            © ${new Date().getFullYear} Argus. Todos los derechos reservados.
         </div>
     </div>
 </body>

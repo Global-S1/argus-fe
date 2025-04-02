@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 import { config } from "@/config";
-import { ContactUsTemplate } from "@/service/email/templates/contact-us.template";
+import { ContactUsTemplate } from "@/service/email/templates/thanks-contact-us.template";
 
 const transporter = nodemailer.createTransport({
   host: config.EMAIL_HOST,

@@ -23,7 +23,7 @@ export const sendMail = async (fields: IEmailParams) => {
   const infoEmail = UserInformationTemplate(fields);
 
   const userMailOptions = {
-    from: '"Argus" <contacto@argus.globals.one>',
+    from: `"Argus" <${config.EMAIL_USER}>`,
     to,
     subject: `🎉 Argus | Estimado ${name}`,
     html: userEmail,
@@ -31,7 +31,7 @@ export const sendMail = async (fields: IEmailParams) => {
 
   const infoMailOptions = {
     from: `"${company} <${to}>"`,
-    to: "contacto@argus.globals.one",
+    to: config.EMAIL_USER,
     subject: `🔔 ${company} requiere atención`,
     html: infoEmail,
   };

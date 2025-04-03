@@ -26,6 +26,7 @@ interface Props {
           message: string;
         };
       };
+      success: string;
     };
   };
 }
@@ -55,7 +56,7 @@ export const ContactoForm = ({ content }: Props) => {
         <div className="absolute left-0 top-0 w-full h-full bg-[#ffffffbb] flex flex-col items-center justify-center">
           <Checkmark />
           <p className="text-sm font-medium text-gray-700">
-            Gracias por contactarnos
+            {content.contact.success}
           </p>
         </div>
       )}

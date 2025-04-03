@@ -173,9 +173,6 @@ export default function Home() {
 
       {/* Footer */}
       <FooterSection currentYear={currentYear} />
-
-      {/* Chat Bubble */}
-      <ChatBubble />
     </div>
   );
 }

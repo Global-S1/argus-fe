@@ -1,10 +1,14 @@
-import { IEmailParams } from "@/service/email/params.interface";
-import { UseFormReturn } from "react-hook-form";
-import { Button } from "../ui/button";
+"use client";
+
 import { sendMail } from "@/service/email/email.service";
+import { IEmailParams } from "@/service/email/params.interface";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { Button } from "../ui/button";
+import { motion } from "framer-motion";
+import { LoaderDots } from "../ui/loaders/loader-dots";
 
 interface Props {
-  form: UseFormReturn<IEmailParams, any, IEmailParams>;
   content: {
     contact: {
       form: {
@@ -26,37 +30,35 @@ interface Props {
   };
 }
 
-export const ContactoForm = ({ form, content }: Props) => {
-  const { register, handleSubmit, formState } = form;
+export const ContactoForm = ({ content }: Props) => {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isSend, setIsSend] = useState<boolean>(false);
+  const { handleSubmit, register, formState } = useForm<IEmailParams>();
 
   const onSubmit = async (value: IEmailParams) => {
-    sendMail(value);
-    // try {
-    //   const response = await fetch("/api/send-email", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(value),
-    //   });
-
-    //   console.log(response);
-
-    //   if (response.ok) {
-    //     console.log("Correo enviado correctamente");
-    //   } else {
-    //     console.error("Error al enviar el correo");
-    //   }
-    // } catch (error) {
-    //   console.error("Error:", error);
-    // }
+    setIsLoading(true);
+    sendMail(value)
+      .then(() => {
+        setIsSend(true);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex flex-col space-y-4 rounded-xl border bg-white dark:bg-gray-800 p-6 shadow-lg"
+      className="relative flex flex-col space-y-4 rounded-xl border bg-white dark:bg-gray-800 p-6 shadow-lg"
     >
+      {isSend && (
+        <div className="absolute left-0 top-0 w-full h-full bg-[#ffffffbb] flex flex-col items-center justify-center">
+          <Checkmark />
+          <p className="text-sm font-medium text-gray-700">
+            Gracias por contactarnos
+          </p>
+        </div>
+      )}
       <div className="grid gap-4">
         <div className="grid grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -131,15 +133,58 @@ export const ContactoForm = ({ form, content }: Props) => {
             placeholder={content.contact.form.placeholder.message}
           />
         </div>
-        <Button
-          className={`w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-md hover:shadow-lg ${
-            !formState.isValid && "opacity-80"
-          }`}
-          disabled={!formState.isValid}
-        >
-          {content.contact.form.submit}
-        </Button>
+        {isLoading ? (
+          <div className="flex items-center justify-center">
+            <LoaderDots scale={0.6} />
+          </div>
+        ) : (
+          <Button
+            className={`w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-md hover:shadow-lg ${
+              !formState.isValid && "opacity-80"
+            }`}
+            disabled={!formState.isValid}
+          >
+            {content.contact.form.submit}
+          </Button>
+        )}
       </div>
     </form>
+  );
+};
+
+const Checkmark = () => {
+  const pathVariants = {
+    hidden: {
+      pathLength: 0,
+      opacity: 0,
+    },
+    visible: {
+      pathLength: 1,
+      opacity: 1,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  return (
+    <svg
+      viewBox="0 0 50 50"
+      width="50"
+      height="50"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <motion.path
+        d="M10 25 L20 35 L40 15"
+        fill="transparent"
+        stroke="#ff900a"
+        strokeWidth="4"
+        strokeLinecap="round"
+        initial="hidden"
+        animate="visible"
+        variants={pathVariants}
+      />
+    </svg>
   );
 };

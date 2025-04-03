@@ -2,16 +2,13 @@
 
 import { useLanguage } from "@/context/language-context";
 import { en, es } from "@/lib/content";
-import { IEmailParams } from "@/service/email/params.interface";
 import { motion } from "framer-motion";
 import { Mail, MapPin, Phone } from "lucide-react";
-import { useForm } from "react-hook-form";
 import { ContactoForm } from "./contacto-form";
 
 export function ContactoSection() {
   const { language } = useLanguage();
   const content = language === "es" ? es : en;
-  const form = useForm<IEmailParams>();
 
   return (
     <div className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
@@ -91,7 +88,7 @@ export function ContactoSection() {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <ContactoForm content={content} form={form} />
+            <ContactoForm content={content} />
           </motion.div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { MessageCircle, X, Send, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/context/language-context";
 import { es, en } from "@/lib/content";
-import { IAService } from "@/service/ia.service";
+import { IAService } from "@/service/ia/ia.service";
 import { LoaderDots } from "./ui/loaders/loader-dots";
 
 const { sendQuestion } = IAService();

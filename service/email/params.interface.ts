@@ -5,3 +5,10 @@ export interface IEmailParams {
   to: string;
   text: string;
 }
+
+export interface IEmailAPIParams {
+  to: string;
+  subject: string;
+  userInfo: string;
+  argusInfo: string;
+}

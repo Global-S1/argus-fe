@@ -1,50 +1,27 @@
-"use server";
-
 import { config } from "@/config";
-import nodemailer from "nodemailer";
-import { IEmailParams } from "./params.interface";
+import { emailInstance } from "@/lib/axios";
+import { IEmailAPIParams, IEmailParams } from "./params.interface";
+import { IEmailSuccessResponse } from "./response.interface";
 import { ThankForContactUsTemplate } from "./templates/thanks-contact-us.template";
 import { UserInformationTemplate } from "./templates/user-information.template";
 
-const transporter = nodemailer.createTransport({
-  host: config.EMAIL_HOST,
-  port: config.EMAIL_SMTP_PORT,
-  secure: true,
-  auth: {
-    user: config.EMAIL_USER,
-    pass: config.EMAIL_PASSWORD,
-  },
-} as nodemailer.TransportOptions);
-
 export const sendMail = async (fields: IEmailParams) => {
-  const { to, company, name } = fields;
-
+  const { to, name } = fields;
   const userEmail = ThankForContactUsTemplate(fields);
   const infoEmail = UserInformationTemplate(fields);
 
-  const userMailOptions = {
-    from: `"Argus" <${config.EMAIL_USER}>`,
-    to,
-    subject: `🎉 Argus | Estimado ${name}`,
-    html: userEmail,
-  };
-
-  const infoMailOptions = {
-    from: `"${company} <${to}>"`,
-    to: config.EMAIL_USER,
-    subject: `🔔 ${company} requiere atención`,
-    html: infoEmail,
-  };
-
   try {
-    await transporter.sendMail(userMailOptions);
+    const response = await emailInstance.post<
+      IEmailSuccessResponse,
+      IEmailAPIParams
+    >("/send-email", {
+      to,
+      subject: `🎉 ${config.PROJECT_NAME} | Estimado ${name}`,
+      userInfo: userEmail,
+      argusInfo: infoEmail,
+    });
+    return response;
   } catch (error) {
-    console.error("Error", error);
-  }
-
-  try {
-    await transporter.sendMail(infoMailOptions);
-  } catch (error) {
-    console.error("Error", error);
+    console.error(error);
   }
 };

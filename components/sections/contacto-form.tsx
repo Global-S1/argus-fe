@@ -2,10 +2,10 @@
 
 import { sendMail } from "@/service/email/email.service";
 import { IEmailParams } from "@/service/email/params.interface";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../ui/button";
-import { motion } from "framer-motion";
 import { LoaderDots } from "../ui/loaders/loader-dots";
 
 interface Props {
@@ -36,9 +36,9 @@ export const ContactoForm = ({ content }: Props) => {
   const [isSend, setIsSend] = useState<boolean>(false);
   const { handleSubmit, register, formState } = useForm<IEmailParams>();
 
-  const onSubmit = async (value: IEmailParams) => {
+  const onSubmit = async (fields: IEmailParams) => {
     setIsLoading(true);
-    sendMail(value)
+    sendMail(fields)
       .then(() => {
         setIsSend(true);
       })

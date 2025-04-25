@@ -102,22 +102,9 @@ export const ThankForContactUsTemplate = (fields: IEmailParams): string => {
                   <td>
                     <p
                       style="font-size:14px;color:rgb(107,114,128);margin:0px;line-height:24px;margin-bottom:16px;margin-top:16px">
-                      Argus Inc., 123 Business Avenue, Lima, Peru
-                    </p>
-                    <p
-                      style="font-size:14px;color:rgb(107,114,128);margin:0px;line-height:24px;margin-bottom:16px;margin-top:16px">
                       ©
                       <!-- -->2025<!-- -->
                       Argus. All rights reserved.
-                    </p>
-                    <p
-                      style="font-size:14px;color:rgb(107,114,128);margin:0px;line-height:24px;margin-bottom:16px;margin-top:16px">
-                      <a
-                        href="https://argus.com/unsubscribe"
-                        style="color:rgb(22,167,225);text-decoration-line:underline"
-                        target="_blank"
-                        >Unsubscribe</a
-                      >
                     </p>
                   </td>
                 </tr>

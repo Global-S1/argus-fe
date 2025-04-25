@@ -163,7 +163,7 @@ export const es = {
     description:
       "Estamos listos para ayudarle a optimizar su cadena logística. Póngase en contacto con nosotros para una consulta personalizada.",
     phone: "+51 123 456 789",
-    email: "contacto@argus.com",
+    email: "contacto@soluciones-argus.com",
     address: "Av. Principal 123, Lima, Perú",
     form: {
       firstName: "Nombre",

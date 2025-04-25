@@ -143,7 +143,6 @@ export function ChatBubble() {
         setMessages((prev) => [...prev, botMessage]);
       })
       .catch((err) => {
-        console.error(err);
         const botMessage: Message = {
           id: `bot-${Date.now()}`,
           text: getResponseForQuestion(inputValue),

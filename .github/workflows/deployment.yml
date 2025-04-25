@@ -48,6 +48,6 @@ jobs:
           key: ${{ secrets.AG_CPANEL_SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.AG_CPANEL_SSH_PRIVATE_KEY_PASSPHRASE }}
           port: 22
-          source: ".next/*"
+          source: "out/*"
           target: ${{ env.target }}
           strip_components: 0

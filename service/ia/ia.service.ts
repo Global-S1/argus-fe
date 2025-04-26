@@ -1,7 +1,7 @@
 import { publicInstance } from "@/lib/axios";
 import { ISendQuestionParam } from "./params.interface";
-import { ISendQuestionResponse } from "./response.interface";
 import { IHttpData } from "@/components/interfaces/http.interface";
+import { ISendQuestionResponse } from "./response.interface";
 
 export const IAService = () => {
   const sendQuestion = async (fields: ISendQuestionParam) => {

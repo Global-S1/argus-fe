@@ -53,12 +53,10 @@ export function InformacionRequeridaSection() {
             {language === "es" ? "Requisitos" : "Requirements"}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight font-heading bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-10 pb-4">
-            {language === "es" ? "Información Requerida del Cliente" : "Required Client Information"}
+            {content.requirements.title}
           </h2>
           <p className="max-w-[900px] text-gray-600 dark:text-gray-300 md:text-xl/relaxed">
-            {language === "es"
-              ? "Para realizar un diagnóstico efectivo, necesitamos acceso a información clave"
-              : "To perform an effective diagnosis, we need access to key information"}
+            {content.requirements.description}
           </p>
         </motion.div>
 
@@ -71,11 +69,7 @@ export function InformacionRequeridaSection() {
         >
           <div className="flex items-center gap-3 text-primary-600 dark:text-primary-400">
             <Lock className="h-5 w-5" />
-            <p className="font-medium">
-              {language === "es"
-                ? "Se firmará acuerdo de confidencialidad para tratamiento de datos."
-                : "A confidentiality agreement will be signed for data processing."}
-            </p>
+            <p className="font-medium">{content.requirements.confidentiality}</p>
           </div>
         </motion.div>
 
@@ -97,59 +91,17 @@ export function InformacionRequeridaSection() {
                     <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
                       <Briefcase className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
-                    <span className="font-bold text-lg">
-                      {language === "es"
-                        ? "Información Operativa y Logística"
-                        : "Operational and Logistics Information"}
-                    </span>
+                    <span className="font-bold text-lg">{content.requirements.operational}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 py-4 text-gray-600 dark:text-gray-300">
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Flujo de procesos logísticos actuales."
-                          : "Current logistics process flow."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Indicadores clave de desempeño (KPIs)."
-                          : "Key performance indicators (KPIs)."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Histórico de ventas y proyección de demanda."
-                          : "Sales history and demand projection."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es" ? "Capacidad y estado del almacén." : "Warehouse capacity and status."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Políticas de inventarios y abastecimiento."
-                          : "Inventory and supply policies."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es" ? "Estrategias y costos de transporte." : "Transport strategies and costs."}
-                      </span>
-                    </li>
+                    {content.requirements.operationalItems.map((item, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </AccordionContent>
               </AccordionItem>
@@ -165,31 +117,17 @@ export function InformacionRequeridaSection() {
                     <div className="w-10 h-10 rounded-full bg-secondary-100 dark:bg-secondary-900/30 flex items-center justify-center">
                       <BarChart className="h-5 w-5 text-secondary-600 dark:text-secondary-400" />
                     </div>
-                    <span className="font-bold text-lg">
-                      {language === "es"
-                        ? "Información Financiera y Presupuestaria"
-                        : "Financial and Budgetary Information"}
-                    </span>
+                    <span className="font-bold text-lg">{content.requirements.financial}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 py-4 text-gray-600 dark:text-gray-300">
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Costos logísticos: almacenamiento, transporte, distribución y manejo de inventarios."
-                          : "Logistics costs: storage, transportation, distribution, and inventory management."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Presupuesto disponible para implementar mejoras en tecnología, infraestructura o procesos."
-                          : "Available budget to implement improvements in technology, infrastructure, or processes."}
-                      </span>
-                    </li>
+                    {content.requirements.financialItems.map((item, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </AccordionContent>
               </AccordionItem>
@@ -205,39 +143,17 @@ export function InformacionRequeridaSection() {
                     <div className="w-10 h-10 rounded-full bg-primary-100 dark:bg-primary-900/30 flex items-center justify-center">
                       <Users className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                     </div>
-                    <span className="font-bold text-lg">
-                      {language === "es"
-                        ? "Acceso a Personal Clave y Recursos"
-                        : "Access to Key Personnel and Resources"}
-                    </span>
+                    <span className="font-bold text-lg">{content.requirements.personnel}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 py-4 text-gray-600 dark:text-gray-300">
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Disponibilidad de entrevistas con líderes y equipos clave de logística, ventas y operaciones."
-                          : "Availability for interviews with key leaders and teams in logistics, sales, and operations."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Acceso a sistemas de información (ERP, WMS, TMS) para análisis de datos logísticos."
-                          : "Access to information systems (ERP, WMS, TMS) for logistics data analysis."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Permisos para visitas y observación en almacenes y centros de distribución."
-                          : "Permissions for visits and observation in warehouses and distribution centers."}
-                      </span>
-                    </li>
+                    {content.requirements.personnelItems.map((item, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <ChevronRight className="h-5 w-5 text-primary-500 dark:text-primary-400 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </AccordionContent>
               </AccordionItem>
@@ -253,29 +169,17 @@ export function InformacionRequeridaSection() {
                     <div className="w-10 h-10 rounded-full bg-secondary-100 dark:bg-secondary-900/30 flex items-center justify-center">
                       <Handshake className="h-5 w-5 text-secondary-600 dark:text-secondary-400" />
                     </div>
-                    <span className="font-bold text-lg">
-                      {language === "es" ? "Compromiso del Cliente" : "Client Commitment"}
-                    </span>
+                    <span className="font-bold text-lg">{content.requirements.commitment}</span>
                   </div>
                 </AccordionTrigger>
                 <AccordionContent className="px-6 py-4 text-gray-600 dark:text-gray-300">
                   <ul className="space-y-3">
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Designación de un responsable interno para coordinar el proyecto y facilitar la recopilación de información."
-                          : "Designation of an internal person responsible for coordinating the project and facilitating information gathering."}
-                      </span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
-                      <span>
-                        {language === "es"
-                          ? "Apertura a recomendaciones y cambios operativos en función de los hallazgos del diagnóstico."
-                          : "Openness to recommendations and operational changes based on diagnostic findings."}
-                      </span>
-                    </li>
+                    {content.requirements.commitmentItems.map((item, index) => (
+                      <li key={index} className="flex items-start gap-2">
+                        <ChevronRight className="h-5 w-5 text-secondary-500 dark:text-secondary-400 flex-shrink-0 mt-0.5" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
                   </ul>
                 </AccordionContent>
               </AccordionItem>
@@ -286,4 +190,3 @@ export function InformacionRequeridaSection() {
     </div>
   )
 }
-

@@ -103,14 +103,14 @@ export function InfiniteCarousel({
         {duplicatedClients.map((client, index) => (
           <motion.div
             key={`${client.id}-${index}`}
-            className="inline-flex flex-col items-center mx-8 transition-transform duration-300 hover:scale-105"
-            style={{ minWidth: "200px" }}
+            className="inline-flex flex-col items-center mx-2 sm:mx-4 md:mx-6 lg:mx-8 transition-transform duration-300 hover:scale-105"
+            style={{ minWidth: "150px", maxWidth: "200px" }}
             whileHover={{
               y: -10,
               transition: { duration: 0.3 },
             }}
           >
-            <div className="relative h-32 w-32 overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-2 shadow-lg border border-gray-200 dark:border-gray-700">
+            <div className="relative h-24 w-24 sm:h-28 sm:w-28 md:h-32 md:w-32 overflow-hidden rounded-lg bg-white dark:bg-gray-800 p-2 shadow-lg border border-gray-200 dark:border-gray-700">
               <Image src={client.image || "/placeholder.svg"} alt={client.name} fill className="object-contain p-2" />
             </div>
             {/* Eliminado el nombre del cliente para mostrar solo los logos */}
@@ -120,4 +120,3 @@ export function InfiniteCarousel({
     </div>
   )
 }
-

@@ -1,10 +1,12 @@
-import { config } from "@/config";
-import axios from "axios";
+import axios from "axios"
+import { config } from "@/config"
 
-export const publicInstance = axios.create({
-  baseURL: `${config.IA_URL}/chat`,
-});
+// Validar que la URL base sea absoluta
+const baseURL = config.EMAIL_MS.startsWith("http") ? config.EMAIL_MS : `https://${config.EMAIL_MS}`
 
 export const emailInstance = axios.create({
-  baseURL: `${config.EMAIL_MS}`,
-});
+  baseURL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+})

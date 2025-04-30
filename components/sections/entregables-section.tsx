@@ -2,6 +2,8 @@
 
 import { motion } from "framer-motion"
 import { GitBranch, Layers, FileCheck, Zap, Workflow } from "lucide-react"
+import { useLanguage } from "@/context/language-context"
+import { es, en } from "@/lib/content"
 
 // Variantes para animaciones
 const fadeIn = {
@@ -14,6 +16,9 @@ const fadeIn = {
 }
 
 export function EntregablesSection() {
+  const { language } = useLanguage()
+  const content = language === "es" ? es : en
+
   return (
     <div className="w-full py-12 md:py-24 lg:py-32 bg-slate-50 dark:bg-gray-900/50">
       <div className="container px-4 md:px-6">
@@ -25,13 +30,15 @@ export function EntregablesSection() {
           variants={fadeIn}
         >
           <span className="inline-block px-3 py-1 text-sm font-medium bg-secondary-100 dark:bg-secondary-900/30 text-secondary-800 dark:text-secondary-300 rounded-full mb-2">
-            Resultados
+            {language === "es" ? "Resultados" : "Results"}
           </span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight font-heading bg-gradient-to-r from-gray-900 to-gray-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent mb-10">
-            Entregables de la Consultoría
+            {language === "es" ? "Entregables de la Consultoría" : "Consulting Deliverables"}
           </h2>
           <p className="max-w-[900px] text-gray-600 dark:text-gray-300 md:text-xl/relaxed">
-            Documentos y análisis que recibirá al finalizar nuestro servicio
+            {language === "es"
+              ? "Documentos y análisis que recibirá al finalizar nuestro servicio"
+              : "Documents and analysis you will receive at the end of our service"}
           </p>
         </motion.div>
 
@@ -59,9 +66,13 @@ export function EntregablesSection() {
                 <GitBranch className="h-8 w-8 text-primary-500 dark:text-primary-400" />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center h-full">
-                <h3 className="font-bold text-lg mb-2">Flujogramas de Procesos Críticos</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  {language === "es" ? "Flujogramas de Procesos Críticos" : "Critical Process Flowcharts"}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Mapeo detallado de los procesos clave en almacenamiento, transporte y distribución.
+                  {language === "es"
+                    ? "Mapeo detallado de los procesos clave en almacenamiento, transporte y distribución."
+                    : "Detailed mapping of key processes in storage, transportation, and distribution."}
                 </p>
               </div>
             </motion.div>
@@ -79,9 +90,13 @@ export function EntregablesSection() {
                 <Layers className="h-8 w-8 text-secondary-500 dark:text-secondary-400" />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center h-full">
-                <h3 className="font-bold text-lg mb-2">Análisis de Brechas Tecnológicas</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  {language === "es" ? "Análisis de Brechas Tecnológicas" : "Technology Gap Analysis"}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Evaluación del nivel de digitalización en los procesos logísticos y oportunidades de mejora.
+                  {language === "es"
+                    ? "Evaluación del nivel de digitalización en los procesos logísticos y oportunidades de mejora."
+                    : "Assessment of digitalization level in logistics processes and improvement opportunities."}
                 </p>
               </div>
             </motion.div>
@@ -99,9 +114,13 @@ export function EntregablesSection() {
                 <FileCheck className="h-8 w-8 text-primary-500 dark:text-primary-400" />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center h-full">
-                <h3 className="font-bold text-lg mb-2">Informe de Hallazgos</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  {language === "es" ? "Hallazgos Clave y Recomendaciones" : "Key Findings and Recommendations"}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Evaluación de costos logísticos y diagnóstico de la gestión de inventarios y niveles de stock.
+                  {language === "es"
+                    ? "Identificación de áreas críticas y sugerencias para optimizar."
+                    : "Identification of critical areas and suggestions for optimization."}
                 </p>
               </div>
             </motion.div>
@@ -119,9 +138,13 @@ export function EntregablesSection() {
                 <Zap className="h-8 w-8 text-secondary-500 dark:text-secondary-400" />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center h-full">
-                <h3 className="font-bold text-lg mb-2">Informe de Quick Wins</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  {language === "es" ? "Resultados Rápidos (Quick Wins)" : "Quick Wins"}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Acciones de implementación rápida con alto impacto en eficiencia y reducción de costos.
+                  {language === "es"
+                    ? "Implementaciones inmediatas para mejoras a corto plazo."
+                    : "Immediate implementations for short-term improvements."}
                 </p>
               </div>
             </motion.div>
@@ -139,9 +162,13 @@ export function EntregablesSection() {
                 <Workflow className="h-8 w-8 text-primary-500 dark:text-primary-400" />
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-lg p-4 shadow-lg border border-gray-100 dark:border-gray-700 text-center h-full">
-                <h3 className="font-bold text-lg mb-2">Roadmap de Implementación</h3>
+                <h3 className="font-bold text-lg mb-2">
+                  {language === "es" ? "Hoja de Ruta Estratégica" : "Strategic Roadmap"}
+                </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-300">
-                  Plan detallado con fases de implementación y KPIs para monitorear avances.
+                  {language === "es"
+                    ? "Plan de acción detallado para la transformación digital a largo plazo."
+                    : "Detailed action plan for long-term digital transformation."}
                 </p>
               </div>
             </motion.div>
@@ -151,4 +178,3 @@ export function EntregablesSection() {
     </div>
   )
 }
-

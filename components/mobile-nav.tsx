@@ -76,7 +76,7 @@ export function MobileNav() {
         <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-7">
           <div className="flex flex-col space-y-4">
             <Link
-              href="#quienes-somos"
+              href="/#quienes-somos"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -84,7 +84,7 @@ export function MobileNav() {
               Quiénes Somos
             </Link>
             <Link
-              href="#servicios"
+              href="/servicios"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -92,7 +92,7 @@ export function MobileNav() {
               Servicios
             </Link>
             <Link
-              href="#propuesta"
+              href="/#propuesta"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -100,7 +100,7 @@ export function MobileNav() {
               Propuesta de Valor
             </Link>
             <Link
-              href="#objetivos"
+              href="/#objetivos"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -108,7 +108,7 @@ export function MobileNav() {
               Objetivos
             </Link>
             <Link
-              href="#areas"
+              href="/especializacion"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -116,7 +116,7 @@ export function MobileNav() {
               Áreas de Especialización
             </Link>
             <Link
-              href="#metodologia"
+              href="/#metodologia"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -124,7 +124,7 @@ export function MobileNav() {
               Metodología
             </Link>
             <Link
-              href="#informacion-requerida"
+              href="/servicios#informacion-requerida"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -132,7 +132,7 @@ export function MobileNav() {
               Información Requerida
             </Link>
             <Link
-              href="#entregables"
+              href="/servicios#entregables"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -140,7 +140,7 @@ export function MobileNav() {
               Entregables
             </Link>
             <Link
-              href="#equipo"
+              href="/#equipo"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -148,7 +148,7 @@ export function MobileNav() {
               Equipo de Trabajo
             </Link>
             <Link
-              href="#clientes"
+              href="/#clientes"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -156,7 +156,7 @@ export function MobileNav() {
               Clientes
             </Link>
             <Link
-              href="#contacto"
+              href="/#contacto"
               className="flex items-center gap-2 text-base font-medium transition-colors hover:text-primary-600 dark:hover:text-primary-400"
               onClick={() => setIsOpen(false)}
             >
@@ -169,4 +169,3 @@ export function MobileNav() {
     </Sheet>
   )
 }
-

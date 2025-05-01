@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 35 100% 52%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 199 80% 49%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 35 100% 52%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 199 80% 49%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
+
+/* Animaciones personalizadas */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animación de burbujas para el fondo */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(0) scale(0.3);
+  }
+  50% {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-120vh) scale(1);
+  }
+}
+
+.bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.bubble {
+  position: absolute;
+  bottom: -100px;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: linear-gradient(to right, rgba(255, 144, 10, 0.1), rgba(22, 167, 225, 0.1));
+  animation: rise calc(var(--time)) infinite ease-in;
+  animation-delay: calc(var(--delay));
+  left: calc(var(--position));
+  opacity: 0;
+}
+
+.dark .bubble {
+  background: linear-gradient(to right, rgba(255, 144, 10, 0.05), rgba(22, 167, 225, 0.05));
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.gradient-bg {
+  background: linear-gradient(90deg, var(--primary-color-light), var(--secondary-color-light));
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.dark .gradient-bg {
+  background: linear-gradient(90deg, var(--primary-color-dark), var(--secondary-color-dark));
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+/* Variables CSS para colores */
+:root {
+  --primary-color-light: #fff9ec;
+  --primary-color: #ff900a;
+  --primary-color-dark: #cc5602;
+  --secondary-color-light: #f1f9fe;
+  --secondary-color: #16a7e1;
+  --secondary-color-dark: #096a9b;
+}
+
+/* Transiciones suaves */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Estilos para scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Estilos para tarjetas con efecto de hover */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+}
+
+/* Estilos para botones con efecto de hover */
+.button-hover {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.button-hover::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.button-hover:hover::after {
+  width: 300%;
+  height: 300%;
+}
+
+/* Estilos para secciones con fondo degradado */
+.gradient-section {
+  background: linear-gradient(135deg, var(--primary-color-light) 0%, var(--secondary-color-light) 100%);
+}
+
+.dark .gradient-section {
+  background: linear-gradient(135deg, rgba(204, 86, 2, 0.2) 0%, rgba(9, 106, 155, 0.2) 100%);
+}
+
+/* Animaciones para el chatbot */
+@keyframes pulse-dot {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.6;
+  }
+}
+
+.animate-pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}
+
+/* Mejoras para la accesibilidad */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* Mejoras para el modo oscuro */
+.dark .dark\:bg-gradient-primary {
+  background: linear-gradient(135deg, rgba(204, 86, 2, 0.2) 0%, rgba(9, 106, 155, 0.2) 100%);
+}
+
+.dark .dark\:text-shadow {
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Mejoras para las tarjetas */
+.card-hover-intense {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card-hover-intense:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark .card-hover-intense:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}

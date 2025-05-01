@@ -22,7 +22,9 @@ export function FooterSection({ currentYear }: FooterSectionProps) {
               <span className="text-xl font-bold font-heading text-primary-500 dark:text-primary-400">Argus</span>
             </div>
             <p className="text-sm text-gray-600 dark:text-gray-300 max-w-xs">
-              Optimizamos su cadena logística con soluciones a medida que reducen costos y mejoran la eficiencia.
+              {language === "es"
+                ? "Optimizamos su cadena logística con soluciones a medida que reducen costos y mejoran la eficiencia."
+                : "We optimize your logistics chain with tailored solutions that reduce costs and improve efficiency."}
             </p>
             <div className="flex space-x-4">
               <a
@@ -37,66 +39,70 @@ export function FooterSection({ currentYear }: FooterSectionProps) {
             </div>
           </div>
           <div className="space-y-4">
-            <h4 className="font-semibold text-gray-800 dark:text-gray-100">Servicios</h4>
+            <h4 className="font-semibold text-gray-800 dark:text-gray-100">{content.footer.services}</h4>
             <div className="flex flex-col space-y-2">
               <button
                 onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Gestión de Inventario
+                {content.footer.inventory}
               </button>
               <button
                 onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Digitalización Logística
+                {content.footer.digitalization}
               </button>
               <button
                 onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Catalogación de Productos
+                {content.footer.cataloging}
               </button>
               <button
                 onClick={() => document.getElementById("servicios")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Procesamiento de Órdenes
+                {content.footer.orderProcessing}
               </button>
             </div>
           </div>
           <div className="space-y-4">
-            <h4 className="font-semibold text-gray-800 dark:text-gray-100">Enlaces Útiles</h4>
+            <h4 className="font-semibold text-gray-800 dark:text-gray-100">{content.footer.usefulLinks}</h4>
             <div className="flex flex-col space-y-2">
               <button
                 onClick={() => document.getElementById("propuesta")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Propuesta de Valor
+                {content.footer.valueProposition}
               </button>
               <button
                 onClick={() => document.getElementById("metodologia")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Metodología
+                {content.footer.methodology}
               </button>
               <button
                 onClick={() => document.getElementById("areas")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Áreas de Expertise
+                {content.footer.expertiseAreas}
               </button>
               <button
                 onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}
                 className="text-left text-gray-600 hover:text-primary-600 dark:text-gray-300 dark:hover:text-primary-400 transition-colors"
               >
-                Contacto
+                {content.footer.contact}
               </button>
             </div>
           </div>
           <div className="space-y-4">
-            <h4 className="font-semibold text-gray-800 dark:text-gray-100">Contacto</h4>
-            <p className="text-sm text-gray-600 dark:text-gray-300">Contáctenos para optimizar su cadena logística.</p>
+            <h4 className="font-semibold text-gray-800 dark:text-gray-100">{content.footer.contactInfo}</h4>
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              {language === "es"
+                ? "Contáctenos para optimizar su cadena logística."
+                : "Contact us to optimize your logistics chain."}
+            </p>
             <div className="flex items-center space-x-2">
               <Mail className="h-4 w-4 text-gray-400" />
               <a
@@ -118,10 +124,10 @@ export function FooterSection({ currentYear }: FooterSectionProps) {
           </div>
         </div>
         <div className="mt-12 text-center text-sm text-gray-500 dark:text-gray-400">
-          &copy; {currentYear} Argus Logistics. Todos los derechos reservados.
+          &copy; {currentYear} Argus Logistics.{" "}
+          {language === "es" ? "Todos los derechos reservados." : "All rights reserved."}
         </div>
       </div>
     </footer>
   )
 }
-

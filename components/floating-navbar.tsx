@@ -10,8 +10,10 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { LanguageSwitcher } from "@/components/language-switcher"
-import { Menu, ChevronDown, Users, Briefcase, Package, Award, Mail } from "lucide-react"
+import { Menu, ChevronDown, Users, Briefcase, Package, Award } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useLanguage } from "@/context/language-context"
+import { es, en } from "@/lib/content"
 
 interface NavItem {
   label: string
@@ -22,9 +24,10 @@ interface NavItem {
 
 interface FloatingNavbarProps {
   mobileBreakpoint?: number
+  items?: { label: string; href: string }[]
 }
 
-export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps) {
+export function FloatingNavbar({ mobileBreakpoint = 1024, items }: FloatingNavbarProps) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
@@ -34,45 +37,30 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
   const router = useRouter()
   const dropdownRef = useRef<HTMLDivElement>(null)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const { language } = useLanguage()
+  const content = language === "es" ? es : en
 
-  // Estructura del menú agrupado
+  // Modificar la estructura del menú agrupado
   const navItems: NavItem[] = [
     {
-      label: "Nosotros",
-      href: "#",
-      icon: <Users className="h-4 w-4" />,
-      children: [
-        { label: "Quiénes Somos", href: "quienes-somos" },
-        { label: "Nuestros Objetivos", href: "objetivos" },
-        { label: "Nuestro Equipo", href: "equipo" },
-        { label: "Propuesta de Valor", href: "propuesta" },
-        { label: "Metodología", href: "metodologia" },
-      ],
-    },
-    {
-      label: "Servicios",
-      href: "servicios",
+      label: language === "es" ? "Servicios" : "Services",
+      href: "/servicios",
       icon: <Package className="h-4 w-4" />,
-      children: [
-        { label: "Nuestros Servicios", href: "servicios" },
-        { label: "Requisitos", href: "informacion-requerida" },
-        { label: "Resultados", href: "entregables" },
-      ],
     },
     {
-      label: "Especialización",
-      href: "areas",
+      label: language === "es" ? "Especialización" : "Specialization",
+      href: "/especializacion",
       icon: <Briefcase className="h-4 w-4" />,
     },
     {
-      label: "Colaboraciones",
-      href: "clientes",
+      label: language === "es" ? "Colaboraciones" : "Collaborations",
+      href: "/colaboraciones",
       icon: <Award className="h-4 w-4" />,
     },
     {
-      label: "Contáctenos",
-      href: "contacto",
-      icon: <Mail className="h-4 w-4" />,
+      label: language === "es" ? "Nosotros" : "About Us",
+      href: "/nosotros",
+      icon: <Users className="h-4 w-4" />,
     },
   ]
 
@@ -120,65 +108,62 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
     }
   }
 
-  // Función para manejar el scroll suave a las secciones
+  // Modificar la función scrollToSection para manejar tanto secciones como navegación a páginas
   const scrollToSection = (sectionId: string) => {
     setIsMobileMenuOpen(false)
     setActiveDropdown(null)
     setIsHoveringDropdown(false)
     setShowOverlay(false)
 
-    // Pequeño retraso para asegurar que el menú móvil se cierre primero
-    setTimeout(() => {
-      const element = document.getElementById(sectionId)
-      if (element) {
-        // Calcular la posición considerando el navbar
-        const navbarHeight = 80
-        const elementPosition = element.getBoundingClientRect().top + window.scrollY
-        const offsetPosition = elementPosition - navbarHeight
+    // Si comienza con '/', es una navegación a otra página
+    if (sectionId.startsWith("/")) {
+      router.push(sectionId)
+      window.scrollTo(0, 0) // Añadir esta línea para desplazarse al inicio
+      return
+    }
 
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: "smooth",
-        })
-      }
-    }, 100)
+    // Si estamos en la página principal, hacemos scroll a la sección
+    if (window.location.pathname === "/") {
+      // Pequeño retraso para asegurar que el menú móvil se cierre primero
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) {
+          // Calcular la posición considerando el navbar
+          const navbarHeight = 80
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY
+          const offsetPosition = elementPosition - navbarHeight
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          })
+        }
+      }, 100)
+    } else {
+      // Si estamos en otra página, redirigimos a la página principal con el hash
+      router.push(`/#${sectionId}`)
+      // No es necesario añadir window.scrollTo(0, 0) aquí porque Next.js manejará el scroll al hash
+    }
   }
 
-  // Renderizar items del menú móvil - ahora mostrando todas las opciones sin necesidad de expandir
+  // Renderizar items del menú móvil - versión simplificada sin elementos repetidos
   const renderMobileMenuItems = (items: NavItem[]) => {
+    // Filtrar elementos repetidos o que ya están en la barra de navegación
+    const filteredItems = items.filter((item) => item.label !== "Contáctenos" && item.label !== "Contacto")
+
     return (
       <div className="space-y-6">
-        {items.map((item, index) => (
+        {filteredItems.map((item, index) => (
           <div key={index} className="space-y-2">
             {/* Título de la sección */}
-            <div className="font-bold text-lg text-primary-600 dark:text-primary-400 flex items-center gap-2 px-2">
+            <Link
+              href={item.href}
+              className="font-bold text-lg text-primary-600 dark:text-primary-400 flex items-center gap-2 px-2"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
               {item.icon}
               {item.label}
-            </div>
-
-            {/* Opciones de la sección */}
-            <div className="space-y-1 ml-6">
-              {item.children ? (
-                item.children.map((child, childIndex) => (
-                  <Button
-                    key={childIndex}
-                    variant="ghost"
-                    className="w-full justify-start text-base py-2"
-                    onClick={() => scrollToSection(child.href)}
-                  >
-                    {child.label}
-                  </Button>
-                ))
-              ) : (
-                <Button
-                  variant="ghost"
-                  className="w-full justify-start text-base py-2"
-                  onClick={() => scrollToSection(item.href)}
-                >
-                  {item.label}
-                </Button>
-              )}
-            </div>
+            </Link>
           </div>
         ))}
       </div>
@@ -227,8 +212,10 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
             href="/"
             className="flex items-center gap-2 z-50"
             onClick={(e) => {
-              e.preventDefault()
-              window.scrollTo({ top: 0, behavior: "smooth" })
+              if (window.location.pathname === "/") {
+                e.preventDefault()
+                window.scrollTo({ top: 0, behavior: "smooth" })
+              }
             }}
           >
             <Image
@@ -258,17 +245,22 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
                   onMouseEnter={() => handleDropdownHover(item.label, true)}
                   onMouseLeave={() => handleDropdownHover(item.label, false)}
                 >
-                  <Button
-                    variant="ghost"
-                    className="text-sm font-medium hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-1"
-                    onClick={() => (item.children ? null : scrollToSection(item.href))}
+                  <div
+                    className="text-sm font-medium hover:text-primary-600 hover:bg-primary-50 dark:hover:bg-gray-800 transition-colors flex items-center gap-1 px-3 py-2 rounded-md cursor-pointer"
+                    onClick={() => {
+                      if (item.label === content.nav.contact) {
+                        scrollToSection("contacto")
+                      } else {
+                        item.children ? null : scrollToSection(item.href)
+                      }
+                    }}
                   >
                     {item.label}
                     {item.children && <ChevronDown className="h-4 w-4" />}
-                  </Button>
+                  </div>
 
                   <AnimatePresence>
-                    {item.children && activeDropdown === item.label && (
+                    {item.children && activeDropdown === item.label && item.label !== "Nosotros" && (
                       <motion.div
                         className="absolute top-full left-0 mt-1 w-48 bg-white dark:bg-gray-800 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 z-50 overflow-hidden"
                         initial="hidden"
@@ -300,12 +292,25 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
             <ThemeToggle />
             <LanguageSwitcher />
 
+            {/* Botón Contáctenos - visible en pantallas grandes */}
             {!isMobile && (
-              <Link href="/consulta">
-                <Button className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-md hover:shadow-lg">
-                  Solicitar Consulta
-                </Button>
-              </Link>
+              <Button
+                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-md hover:shadow-lg"
+                onClick={() => scrollToSection("contacto")}
+              >
+                {language === "es" ? "Contáctenos" : "Contact Us"}
+              </Button>
+            )}
+
+            {/* Versión compacta para móvil */}
+            {isMobile && (
+              <Button
+                className="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 transition-all duration-300 shadow-md hover:shadow-lg mr-2"
+                size="sm"
+                onClick={() => scrollToSection("contacto")}
+              >
+                {language === "es" ? "Contacto" : "Contact"}
+              </Button>
             )}
 
             {isMobile && (
@@ -346,15 +351,10 @@ export function FloatingNavbar({ mobileBreakpoint = 1024 }: FloatingNavbarProps)
             transition={{ duration: 0.2 }}
           >
             <nav className="flex flex-col space-y-6">{renderMobileMenuItems(navItems)}</nav>
-            <Link href="/consulta" className="mt-8">
-              <Button className="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700">
-                Solicitar Consulta
-              </Button>
-            </Link>
+            {/* Se eliminó el botón de Solicitar Consulta del menú móvil */}
           </motion.div>
         )}
       </AnimatePresence>
     </>
   )
 }
-

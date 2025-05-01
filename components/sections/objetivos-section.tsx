@@ -101,7 +101,7 @@ export function ObjetivosSection() {
             whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 w-full"
           >
-            <div className="p-6">
+            <div className="p-6 flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center mb-4">
                 <AlertTriangle className="h-7 w-7 text-red-600 dark:text-red-400" />
               </div>
@@ -121,7 +121,7 @@ export function ObjetivosSection() {
             whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 w-full"
           >
-            <div className="p-6">
+            <div className="p-6 flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-4">
                 <Clock className="h-7 w-7 text-blue-600 dark:text-blue-400" />
               </div>
@@ -141,7 +141,7 @@ export function ObjetivosSection() {
             whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
             className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 w-full"
           >
-            <div className="p-6">
+            <div className="p-6 flex flex-col items-center text-center">
               <div className="w-14 h-14 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-4">
                 <Users className="h-7 w-7 text-green-600 dark:text-green-400" />
               </div>
@@ -158,13 +158,13 @@ export function ObjetivosSection() {
 
           {/* Contenedor para centrar el segundo renglón */}
           <div className="lg:col-span-3 flex justify-center w-full">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[66%]">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full md:max-w-[66%]">
               <motion.div
                 variants={itemVariant}
                 whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 w-full"
               >
-                <div className="p-6">
+                <div className="p-6 flex flex-col items-center text-center">
                   <div className="w-14 h-14 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-4">
                     <Zap className="h-7 w-7 text-purple-600 dark:text-purple-400" />
                   </div>
@@ -184,7 +184,7 @@ export function ObjetivosSection() {
                 whileHover={{ y: -10, scale: 1.03, transition: { duration: 0.3 } }}
                 className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-100 dark:border-gray-700 w-full"
               >
-                <div className="p-6">
+                <div className="p-6 flex flex-col items-center text-center">
                   <div className="w-14 h-14 rounded-full bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
                     <BarChart2 className="h-7 w-7 text-orange-600 dark:text-orange-400" />
                   </div>
@@ -203,4 +203,3 @@ export function ObjetivosSection() {
     </div>
   )
 }
-

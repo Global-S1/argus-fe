@@ -1,14 +1,9 @@
 export interface IEmailParams {
-  name: string;
-  lastname: string;
-  company: string;
-  to: string;
-  text: string;
-}
-
-export interface IEmailAPIParams {
-  to: string;
-  subject: string;
-  userInfo: string;
-  argusInfo: string;
+  to: string
+  name: string
+  company?: string
+  phone?: string
+  message?: string
+  service?: string
+  [key: string]: any
 }

@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import "./globals.css"
 import { LanguageProvider } from "@/context/language-context"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ScrollToTop } from "@/components/scroll-to-top"
 
 // Update the metadata to include the dynamic year in the title
 export const metadata: Metadata = {
@@ -34,13 +35,12 @@ export default function RootLayout({
       </head>
       <body className="font-body">
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <ScrollToTop />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
   )
 }
-
-
-
-import './globals.css'

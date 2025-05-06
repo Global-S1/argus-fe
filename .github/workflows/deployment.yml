@@ -14,16 +14,8 @@ permissions:
   actions: read
 
 jobs:
-  debug-key:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print SSH Key
-        run: |
-          echo "${{ secrets.AG_CPANEL_SSH_PRIVATE_KEY }}" | base64 --decode
-
   build-and-deploy:
     runs-on: ubuntu-latest
-    needs: debug-key
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
